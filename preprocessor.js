@@ -1,24 +1,32 @@
 const crypto = require('crypto');
-const fs = require("fs");
-const nodepath = require("path");
-const tsc = require("typescript");
+const fs = require('fs');
+const nodepath = require('path');
+const tsc = require('typescript');
+const instrument = require('istanbul-lib-instrument');
+
+const instrumenter = instrument.createInstrumenter();
 
 module.exports = {
+	canInstrument: true,
 	process(src, path) {
 		if (path.endsWith('.ts') || path.endsWith('.tsx')) {
-			src = tsc.transpile(
+			const { outputText, sourceMapText } = tsc.transpileModule(
 				src,
 				{
-					module: tsc.ModuleKind.CommonJS,
-					jsx: tsc.JsxEmit.React,
-					importHelpers: true,
-					sourceMap: true,
-					inlineSourceMap: true,
-					inlineSources: true
-				},
-				path,
-				[]
+					compilerOptions: {
+						module: tsc.ModuleKind.CommonJS,
+						jsx: tsc.JsxEmit.React,
+						importHelpers: true,
+						sourceMap: true,
+						inlineSources: true
+					},
+					fileName: path,
+					reportDiagnostics: false,
+				}
 			);
+
+			const sourceMap = JSON.parse(sourceMapText);
+			src = instrumenter.instrumentSync(outputText, path, sourceMap);
 		}
 		return src;
 	},
