@@ -30,6 +30,10 @@ module.exports = {
 		}
 		return src;
 	},
+	getEmptyCoverage(src, path) {
+		this.process(src, path);
+		return instrumenter.lastFileCoverage();
+	},
 	getCacheKey: createCacheKeyFunction()
 };
 
