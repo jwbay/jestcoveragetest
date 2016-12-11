@@ -1,0 +1,25 @@
+{
+  "name": "jestcoveragetest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --config jest.json -u"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/enzyme": "^2.5.39",
+    "@types/jest": "^16.0.1",
+    "@types/react": "^0.14.54",
+    "@types/react-test-renderer": "^15.4.0",
+    "enzyme": "^2.6.0",
+    "jest": "^17.0.3",
+    "react": "^15.4.1",
+    "react-addons-test-utils": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "react-test-renderer": "^15.4.1",
+    "tslib": "^1.2.0",
+    "typescript": "^2.1.4"
+  }
+}
