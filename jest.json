@@ -4,22 +4,14 @@
 		"html"
 	],
 	"collectCoverage": true,
-	"collectCoverageFrom": [
-		"**/*.{ts,tsx}"
-	],
 	"moduleFileExtensions": [
 		"ts",
 		"tsx",
 		"js",
 		"json"
 	],
-	"notify": true,
 	"transform": {
 		".*": "<rootDir>/preprocessor.js"
 	},
-	"testRegex": "test.tsx?$",
-	"unmockedModulePathPatterns": [
-		"enzyme",
-		"react"
-	]
+	"testRegex": "test.tsx?$"
 }

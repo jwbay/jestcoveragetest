@@ -24,7 +24,8 @@ const exec = require('child_process').execSync;
 	'jest-resolve-dependencies',
 	'jest-runtime',
 	'jest-snapshot',
-	'jest-util'
+	'jest-util',
+	'pretty-format'
 ].forEach(package => {
 	exec(`yarn link ${package}`);
 	console.log(package);
