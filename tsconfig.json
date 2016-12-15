@@ -9,8 +9,6 @@
     "importHelpers": true,
     "moduleResolution": "node",
     "removeComments": false,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
     "target": "es5",
     "baseUrl": ".",
     "lib": [

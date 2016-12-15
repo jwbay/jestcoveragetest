@@ -5,12 +5,15 @@ const tsc = require('typescript');
 const instrument = require('istanbul-lib-instrument');
 
 const instrumenter = instrument.createInstrumenter();
+const key = fs.statSync(__filename).mtime.getTime().toString();
 
 module.exports = {
-	canInstrument: true,
 	process(src, path) {
+		if (path.endsWith('.lock')) {
+			return `module.exports = "${path}"`;
+		}
 		if (path.endsWith('.ts') || path.endsWith('.tsx')) {
-			const { outputText, sourceMapText } = tsc.transpileModule(
+			const { outputText } = tsc.transpileModule(
 				src,
 				{
 					compilerOptions: {
@@ -18,29 +21,20 @@ module.exports = {
 						jsx: tsc.JsxEmit.React,
 						importHelpers: true,
 						sourceMap: true,
+						inlineSourceMap: true,
 						inlineSources: true
 					},
 					fileName: path,
 					reportDiagnostics: false,
 				}
 			);
-
-			const sourceMap = JSON.parse(sourceMapText);
-			src = instrumenter.instrumentSync(outputText, path, sourceMap);
+			return outputText;
 		}
 		return src;
 	},
-	getEmptyCoverage(src, path) {
-		this.process(src, path);
-		return instrumenter.lastFileCoverage();
-	},
-	getCacheKey: createCacheKeyFunction()
+	getCacheKey: (src, file, configString) =>
+		crypto.createHash('md5')
+			.update(key)
+			.update(src + file + configString)
+			.digest('hex')
 };
-
-function createCacheKeyFunction() {
-	const key = fs.statSync(__filename).mtime.getTime().toString();
-	return (src, file, configString) => crypto.createHash('md5')
-		.update(key)
-		.update(src + file + configString)
-		.digest('hex');
-}

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "pretest": "rm -rf coverage",
-    "test": "jest --config jest.json -u --no-cache",
+    "test": "jest -i --config jest.json -u --no-cache",
     "postinstall": "node link"
   },
   "author": "",
