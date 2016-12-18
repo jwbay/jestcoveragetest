@@ -37,5 +37,4 @@ export default class Link extends React.Component<{ page: string }, { class: STA
       </a>
     );
   }
-
 }

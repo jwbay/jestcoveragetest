@@ -3,7 +3,7 @@ import * as renderer from 'react-test-renderer';
 const which = '';
 const Link = require('./Link' + which).default;
 
-for (var index = 0; index < 10; index++) {
+for (let index = 0; index < 10; index++) {
  test('Link changes the class when hovered' + index, () => {
     const component = renderer.create(
       <Link page="http://www.facebook.com">Facebook</Link>
