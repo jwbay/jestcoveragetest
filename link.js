@@ -18,7 +18,6 @@ const exec = require('child_process').execSync;
 	'jest-matcher-utils',
 	'jest-matchers',
 	'jest-mock',
-	'jest-react-native',
 	'jest-repl',
 	'jest-resolve',
 	'jest-resolve-dependencies',
