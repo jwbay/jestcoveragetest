@@ -6,7 +6,7 @@
     "configurations": [
         {
             "name": "Debug Tests",
-            "type": "node",
+            "type": "node2",
             "request": "launch",
             "program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
             "stopOnEntry": false,
@@ -23,8 +23,7 @@
             "runtimeArgs": [
                 "--nolazy"
             ],
-            "sourceMaps": false,
-            "outDir": null
+            "sourceMaps": false
         }
     ]
 }

@@ -4,15 +4,22 @@
 		"html"
 	],
 	"collectCoverage": true,
+	"collectCoverageFrom": [
+		"src/**/*"
+	],
 	"mapCoverage": true,
 	"moduleFileExtensions": [
 		"ts",
 		"tsx",
 		"js",
-		"json"
+		"json",
+		"coffee"
 	],
 	"transform": {
-		".tsx": "<rootDir>/preprocessor.js"
+		"typescript": "<rootDir>/transform-typescript.js",
+		"babel": "<rootDir>/transform-babel.js",
+		"buble": "<rootDir>/transform-buble.js",
+		"coffeescript": "<rootDir>/transform-coffeescript.js"
 	},
-	"testRegex": "test.tsx?$"
+	"testRegex": "src/(.+)\\.test\\."
 }

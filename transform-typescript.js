@@ -1,25 +1,24 @@
 const crypto = require('crypto');
 const fs = require('fs');
-const nodepath = require('path');
 const tsc = require('typescript');
 const { compilerOptions } = require('./tsconfig.json');
 
 const thisFile = fs.readFileSync(__filename, 'utf8');
 
 module.exports = {
-	process(src, path) {
+	process(src, file) {
 		const { outputText, sourceMapText } = tsc.transpileModule(
 			src,
 			{
 				compilerOptions: compilerOptions,
-				fileName: path,
+				fileName: file,
 				reportDiagnostics: false,
 			}
 		);
 
 		return {
-			content: outputText,
-			sourceMap: JSON.parse(sourceMapText)
+			code: outputText,
+			map: sourceMapText
 		};
 	},
 	getCacheKey: (src, file, configString) =>
